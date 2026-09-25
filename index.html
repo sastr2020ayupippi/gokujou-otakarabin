@@ -10,6 +10,26 @@
 @media print{body{background:#fff}.page{width:100%}.button{border:1px solid white}.hero,.section,.cta{break-inside:avoid}}
 /* Order form */
 .cta{padding:88px 7vw}.cta>p{margin-bottom:36px}.order-form{max-width:760px;margin:0 auto;text-align:left;background:#fff;color:var(--ink);border-radius:14px;padding:32px;box-shadow:0 16px 40px rgba(0,0,0,.12)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:14px;font-weight:750;color:var(--green-deep)}.required{color:var(--accent);font-size:12px;margin-left:5px}.field input,.field select,.field textarea{width:100%;min-height:48px;border:1px solid #cfcac0;border-radius:8px;padding:11px 12px;background:#fff;color:var(--ink);font:inherit;font-size:16px}.field textarea{min-height:94px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid rgba(94,138,91,.2);border-color:var(--green)}.payment-note{margin:22px 0 16px;padding:16px 18px;background:var(--soft);border-radius:8px;color:var(--ink);font-size:14px;line-height:1.8}.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:0 0 22px}.consent input{width:20px;height:20px;flex:0 0 auto}.generate{width:100%;min-height:54px;border:0;border-radius:8px;background:var(--green-deep);color:#fff;font:inherit;font-weight:800;cursor:pointer}.result{display:none;margin-top:26px;padding-top:26px;border-top:1px solid var(--line)}.result.show{display:block}.result h3{margin:0 0 10px;color:var(--green-deep)}.result textarea{width:100%;min-height:340px;border:1px solid var(--line);border-radius:8px;padding:14px;font:14px/1.65 Menlo,Consolas,monospace;background:#faf9f6;resize:vertical}.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.order-form .button{border:1px solid var(--green-deep);padding:12px 20px;cursor:pointer}.order-form .button.primary{background:var(--green-deep);color:#fff}.copy-status{text-align:center;min-height:24px;margin:8px 0 0!important;color:var(--green-deep);font-size:13px;opacity:1!important}.cta .privacy{text-align:center;color:var(--muted);font-size:12px;margin:16px 0 0;opacity:1}.account{text-align:center;color:var(--green-deep);font-weight:700;font-size:14px;margin:4px 0 0!important;opacity:1!important}@media(max-width:760px){.cta{padding:72px 16px}.order-form{padding:24px 18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.actions{grid-template-columns:1fr}}
+
+/* Direct order submission */
+.form-intro{max-width:620px!important;margin:0 auto 36px!important}
+.field small{color:var(--muted);font-size:12px;line-height:1.65}
+.field .input-help{margin:0;color:var(--muted)}
+.instagram-note{margin:0;padding:14px 16px;background:#f2f7ef;border:1px solid #cdddc9;border-radius:8px;color:var(--green-deep);font-size:13px;line-height:1.75}
+.submit-status{min-height:26px;margin:12px 0 0!important;text-align:center;font-size:14px;opacity:1!important}
+.submit-status.sending{color:var(--green-deep)}
+.submit-status.error{color:#9a2f38;font-weight:700}
+.generate:disabled{cursor:wait;opacity:.68}
+.form-complete{display:none;max-width:760px;margin:0 auto;padding:48px 32px;background:#fff;color:var(--ink);border-radius:14px;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.12)}
+.form-complete.show{display:block}
+.form-complete .complete-mark{width:64px;height:64px;margin:0 auto 20px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green-deep);font-size:28px}
+.form-complete h3{margin:0 0 18px;font-family:Georgia,"Yu Mincho",serif;font-size:30px;font-weight:500;color:var(--green-deep)}
+.form-complete p{margin:0 auto;max-width:540px;line-height:1.9}
+.form-complete p+p{margin-top:14px}
+.form-complete .complete-note{font-size:14px;color:var(--muted)}
+.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+@media(max-width:760px){.form-complete{padding:38px 22px}.form-complete h3{font-size:26px}}
+
 </style>
 </head>
 <body>
@@ -74,26 +94,36 @@
 <section class="cta" id="apply">
 <div class="mini">ORDER</div>
 <h2>極上変態お宝便<br>お申し込み</h2>
-<p>必要事項を入力すると、InstagramのDMにそのまま貼り付けられる注文文が完成します。</p>
-<form class="order-form" id="orderForm">
+<p class="form-intro">フォーム送信で、お申し込み受付が完了します。<br>内容を確認後、ご入力いただいたInstagramアカウントへDMでご連絡します。</p>
+<form class="order-form" id="orderForm" novalidate>
+<div class="hp-field" aria-hidden="true"><label for="website">ウェブサイト</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <div class="form-grid">
-<div class="field full"><label for="course">ご希望のコース<span class="required">必須</span></label><select id="course" required><option value="">選択してください</option><option value="20本コース／1回18,100円・3ヶ月合計54,300円">20本コース｜3ヶ月 54,300円</option><option value="15本コース／1回14,500円・3ヶ月合計43,500円">15本コース｜3ヶ月 43,500円</option><option value="10本コース／1回10,300円・3ヶ月合計30,900円">10本コース｜3ヶ月 30,900円</option><option value="7本コース／1回8,000円・3ヶ月合計24,000円">7本コース｜3ヶ月 24,000円</option></select></div>
-<div class="field full"><label for="addon">単一品種オプション（3ヶ月）</label><select id="addon"><option>追加なし</option><option>単一 5本／1回3,900円・3ヶ月合計11,700円</option><option>単一 10本／1回7,800円・3ヶ月合計23,400円</option></select><small>オプション追加時の確定送料は、ご注文後のご請求時にお知らせします。</small></div>
-<div class="field full"><label for="deliveryBatch">ご希望の便<span class="required">必須</span></label><select id="deliveryBatch" required><option value="">選択してください</option><option>1便｜10/2・11/6・12/4</option><option>2便｜10/23・11/20・12/18</option></select></div>
-<div class="field"><label for="customerName">お名前<span class="required">必須</span></label><input id="customerName" autocomplete="name" required placeholder="例：山田 花子"></div>
-<div class="field"><label for="phone">電話番号<span class="required">必須</span></label><input id="phone" type="tel" autocomplete="tel" required inputmode="tel" placeholder="例：090-1234-5678"></div>
-<div class="field"><label for="postal">郵便番号<span class="required">必須</span></label><input id="postal" autocomplete="postal-code" required inputmode="numeric" placeholder="例：123-4567"></div>
-<div class="field"><label for="deliveryTime">配送時間帯</label><select id="deliveryTime"><option>午前中</option><option>指定なし</option><option>14〜16時</option><option>16〜18時</option><option>18〜20時</option><option>19〜21時</option></select></div>
-<div class="field full"><label for="address">お届け先住所<span class="required">必須</span></label><input id="address" autocomplete="street-address" required placeholder="都道府県からご入力ください"></div>
-<div class="field full"><label for="payment">お支払い方法<span class="required">必須</span></label><select id="payment" required><option value="">選択してください</option><option>楽天銀行振込</option><option>PayPay</option><option>クレジットカード決済</option></select></div>
-<div class="field full"><label for="orderNote">備考・ご相談</label><textarea id="orderNote" placeholder="配送についてのご相談などがあればご入力ください"></textarea></div>
+<div class="field full"><label for="course">ご希望のコース<span class="required">必須</span></label><select id="course" name="course" required><option value="">選択してください</option><option value="20本コース／1回18,100円・3ヶ月合計54,300円">20本コース｜3ヶ月 54,300円</option><option value="15本コース／1回14,500円・3ヶ月合計43,500円">15本コース｜3ヶ月 43,500円</option><option value="10本コース／1回10,300円・3ヶ月合計30,900円">10本コース｜3ヶ月 30,900円</option><option value="7本コース／1回8,000円・3ヶ月合計24,000円">7本コース｜3ヶ月 24,000円</option></select></div>
+<div class="field full"><label for="addon">単一品種オプション（3ヶ月）</label><select id="addon" name="addon"><option>追加なし</option><option>単一 5本／1回3,900円・3ヶ月合計11,700円</option><option>単一 10本／1回7,800円・3ヶ月合計23,400円</option></select><small>オプション追加時の確定送料は、ご注文後のご請求時にお知らせします。</small></div>
+<div class="field full"><label for="deliveryBatch">ご希望の便<span class="required">必須</span></label><select id="deliveryBatch" name="deliveryBatch" required><option value="">選択してください</option><option>1便｜10/2・11/6・12/4</option><option>2便｜10/23・11/20・12/18</option></select></div>
+<div class="field full"><label for="instagram">Instagramアカウント<span class="required">必須</span></label><input id="instagram" name="instagram" required inputmode="text" autocapitalize="off" autocomplete="off" placeholder="例：@ayupippi_239" pattern="^@?[A-Za-z0-9._]{1,30}$"><p class="input-help">お申し込み内容の確認・お支払いについて、ご入力いただいたInstagramアカウントへDMでご連絡します。</p></div>
+<div class="field"><label for="customerName">お名前<span class="required">必須</span></label><input id="customerName" name="customerName" autocomplete="name" required placeholder="例：山田 花子"></div>
+<div class="field"><label for="phone">電話番号<span class="required">必須</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" required inputmode="tel" placeholder="例：090-1234-5678" pattern="[0-9０-９+＋()（）ー―−-]{9,20}"></div>
+<div class="field"><label for="postal">郵便番号<span class="required">必須</span></label><input id="postal" name="postal" autocomplete="postal-code" required inputmode="numeric" placeholder="例：123-4567" pattern="[0-9０-９]{3}[-ー]?[0-9０-９]{4}"></div>
+<div class="field"><label for="deliveryTime">配送時間帯</label><select id="deliveryTime" name="deliveryTime"><option>午前中</option><option>指定なし</option><option>14〜16時</option><option>16〜18時</option><option>18〜20時</option><option>19〜21時</option></select></div>
+<div class="field full"><label for="address">お届け先住所<span class="required">必須</span></label><input id="address" name="address" autocomplete="street-address" required placeholder="都道府県からご入力ください"></div>
+<div class="field full"><label for="payment">お支払い方法<span class="required">必須</span></label><select id="payment" name="payment" required><option value="">選択してください</option><option>楽天銀行振込</option><option>PayPay</option><option>クレジットカード決済</option></select></div>
+<div class="field full"><label for="orderNote">備考・ご相談</label><textarea id="orderNote" name="orderNote" placeholder="配送についてのご相談などがあればご入力ください"></textarea></div>
 </div>
-<div class="payment-note">DMでご注文いただいた後、ご入金方法をご案内いたします。<br>ご入金の確認をもって、ご予約確定となります。</div>
-<label class="consent"><input id="consent" type="checkbox" required><span>ご予約確定後のキャンセル・返金はできません。<br>受け取りが難しい日がある場合は、事前にご相談ください。振替や発送日の変更など、できる限り対応いたします。</span></label>
-<button class="generate" type="submit">DM用の注文文を作る</button>
-<div class="result" id="result" aria-live="polite"><h3>注文文ができました</h3><textarea id="orderText" readonly></textarea><div class="actions"><button class="button primary" type="button" id="copyButton">注文文をコピー</button><a class="button" href="https://ig.me/m/ayupippi_239" target="_blank" rel="noopener">InstagramのDMを開く</a></div><p class="account">送信先：@ayupippi_239</p><p class="copy-status" id="copyStatus"></p></div>
-<p class="privacy">入力内容は送信・保存されません。注文文の作成にのみ使用されます。</p>
+<div class="payment-note">お申し込み内容を確認後、InstagramのDMにてご入金方法をご案内いたします。<br>ご入金の確認をもって、ご予約確定となります。</div>
+<label class="consent"><input id="consent" name="consent" type="checkbox" required><span>ご予約確定後のキャンセル・返金はできません。<br>受け取りが難しい日がある場合は、事前にご相談ください。振替や発送日の変更など、できる限り対応いたします。</span></label>
+<button class="generate" id="submitButton" type="submit">この内容で申し込む</button>
+<p class="submit-status" id="submitStatus" role="status" aria-live="polite"></p>
+<p class="privacy">入力内容は、お申し込み受付・ご連絡のためにのみ使用します。お客さまへの自動返信メールは送信されません。</p>
 </form>
+<div class="form-complete" id="formComplete" role="status" aria-live="polite" tabindex="-1">
+<div class="complete-mark">✓</div>
+<h3>お申し込みありがとうございます🌹</h3>
+<p>極上変態お宝便のお申し込みを受け付けました。</p>
+<p>内容を確認後、ご入力いただいたInstagramアカウントへDMにてご連絡いたします💌</p>
+<p>ご入金の確認をもって、ご予約確定となります。</p>
+<p class="complete-note">少しだけお待ちください🌹</p>
+</div>
 </section>
 <section class="closing">
 <h2 class="closing-copy"><span>ここから3ヶ月は特に色気たっぷり。</span><span>キュンキュンを超えて、<br>心臓が痛くなるような<br>極上バラをお届けします🌹</span><span>心して、お待ちください。笑</span></h2>
@@ -102,10 +132,98 @@
 <footer class="footer"><div class="brand">sastR</div><div>stop & smell the Roses.</div></footer>
 </main>
 <script>
-const form=document.getElementById('orderForm'),result=document.getElementById('result'),orderText=document.getElementById('orderText'),copyStatus=document.getElementById('copyStatus');
-const getValue=id=>document.getElementById(id).value.trim();
-form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const note=getValue('orderNote')||'特になし';orderText.value=`【10〜12月 極上変態お宝便 お申し込み】\n\n■ご希望のコース\n${getValue('course')}\n\n■単一品種オプション（3ヶ月）\n${getValue('addon')}\n\n■ご希望の便\n${getValue('deliveryBatch')}\n\n■お名前\n${getValue('customerName')}\n\n■郵便番号\n${getValue('postal')}\n\n■お届け先住所\n${getValue('address')}\n\n■電話番号\n${getValue('phone')}\n\n■お支払い方法\n${getValue('payment')}\n\n■配送希望時間帯\n${getValue('deliveryTime')}\n\n■備考・ご相談\n${note}\n\n注意事項を確認のうえ、申し込みます。`;result.classList.add('show');copyStatus.textContent='';result.scrollIntoView({behavior:'smooth',block:'start'});});
-document.getElementById('copyButton').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(orderText.value);}catch(error){orderText.select();document.execCommand('copy');}copyStatus.textContent='コピーしました。InstagramのDMに貼り付けてください。';});
+// 花束・アレンジメント注文フォームと同じ Google Apps Script 方式。
+// デプロイ後に発行される「ウェブアプリ URL（末尾 /exec）」を設定してください。
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz2O5GYaMqWvSIjiguwVjJ0WZLQTLOveNljDGZmZtYSPlxblb0zKKX8wwC93nNCubbV/exec';
+const FORM_OPENED_AT = Date.now();
+const MIN_INPUT_TIME_MS = 3000;
+const DUPLICATE_WINDOW_MS = 120000;
+
+const form = document.getElementById('orderForm');
+const submitButton = document.getElementById('submitButton');
+const submitStatus = document.getElementById('submitStatus');
+const formComplete = document.getElementById('formComplete');
+const getValue = id => document.getElementById(id).value.trim();
+
+function normalizeInstagram(value){
+  const account=value.trim().replace(/^＠/,'@');
+  return account.startsWith('@') ? account : '@'+account;
+}
+function setStatus(message,type=''){
+  submitStatus.textContent=message;
+  submitStatus.className='submit-status'+(type?' '+type:'');
+}
+function payloadFromForm(){
+  return {
+    formType:'gokujou_otakarabin_2026_10_12',
+    course:getValue('course'),
+    addon:getValue('addon'),
+    deliveryBatch:getValue('deliveryBatch'),
+    instagram:normalizeInstagram(getValue('instagram')),
+    customerName:getValue('customerName'),
+    phone:getValue('phone'),
+    postal:getValue('postal'),
+    address:getValue('address'),
+    deliveryTime:getValue('deliveryTime'),
+    payment:getValue('payment'),
+    orderNote:getValue('orderNote')||'特になし',
+    consent:document.getElementById('consent').checked,
+    website:getValue('website'),
+    submittedAt:new Date().toISOString(),
+    inputDurationMs:Date.now()-FORM_OPENED_AT,
+    requestId:(crypto.randomUUID ? crypto.randomUUID() : Date.now()+'-'+Math.random().toString(16).slice(2)),
+    pageUrl:location.href
+  };
+}
+function payloadFingerprint(data){
+  return [data.instagram,data.customerName,data.course,data.deliveryBatch,data.phone].join('|');
+}
+
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  setStatus('');
+  if(!form.reportValidity()) return;
+  if(Date.now()-FORM_OPENED_AT < MIN_INPUT_TIME_MS){
+    setStatus('入力内容をご確認のうえ、もう一度お申し込みください。','error');
+    return;
+  }
+  const data=payloadFromForm();
+  if(data.website) return;
+  if(GAS_WEB_APP_URL.includes('PASTE_YOUR_')){
+    setStatus('現在、送信準備中です。InstagramのDMでご連絡ください。','error');
+    return;
+  }
+  const fingerprint=payloadFingerprint(data);
+  const previous=JSON.parse(localStorage.getItem('otakarabinLastSubmission')||'null');
+  if(previous && previous.fingerprint===fingerprint && Date.now()-previous.time<DUPLICATE_WINDOW_MS){
+    setStatus('同じ内容はすでに送信されています。DMでのご連絡をお待ちく��さい。','error');
+    return;
+  }
+  submitButton.disabled=true;
+  submitButton.textContent='送信しています…';
+  setStatus('お申し込み内容を送信しています。画面を閉じずにお待ちください。','sending');
+  try{
+    const response=await fetch(GAS_WEB_APP_URL,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(data),
+      redirect:'follow'
+    });
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    const result=await response.json();
+    if(!result.ok) throw new Error(result.message||'送信に失敗しました');
+    localStorage.setItem('otakarabinLastSubmission',JSON.stringify({fingerprint,time:Date.now(),requestId:data.requestId}));
+    form.hidden=true;
+    formComplete.classList.add('show');
+    formComplete.focus();
+    formComplete.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(error){
+    console.error(error);
+    setStatus('送信できませんでした。時間をおいて再度お試しいただくか、InstagramのDMでご連絡ください。','error');
+    submitButton.disabled=false;
+    submitButton.textContent='この内容で申し込む';
+  }
+});
 </script>
 </body>
 </html>
