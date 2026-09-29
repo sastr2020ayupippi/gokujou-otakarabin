@@ -203,15 +203,12 @@ form.addEventListener('submit', async event => {
   submitButton.textContent='送信しています…';
   setStatus('お申し込み内容を送信しています。画面を閉じずにお待ちください。','sending');
   try{
-    const response=await fetch(GAS_WEB_APP_URL,{
+        await fetch(GAS_WEB_APP_URL,{
       method:'POST',
+      mode:'no-cors',
       headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify(data),
-      redirect:'follow'
+      body:JSON.stringify(data)
     });
-    if(!response.ok) throw new Error('HTTP '+response.status);
-    const result=await response.json();
-    if(!result.ok) throw new Error(result.message||'送信に失敗しました');
     localStorage.setItem('otakarabinLastSubmission',JSON.stringify({fingerprint,time:Date.now(),requestId:data.requestId}));
     form.hidden=true;
     formComplete.classList.add('show');
